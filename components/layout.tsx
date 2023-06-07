@@ -45,8 +45,8 @@ export default function Layout({
               <h1 className={utilStyles.heading2Xl}>{name}</h1>
               <div className={styles.socials}>
                 <button onClick={toggleEmail}><FaEnvelope /></button>
-                <a href="https://www.linkedin.com/in/cooper-miller/"><FaLinkedin /></a>
-                <a href="https://github.com/kcoopermiller"><FaGithub /></a>
+                <a href="https://www.linkedin.com/in/cooper-miller/" target="_blank" rel="noopener noreferrer"><FaLinkedin /></a>
+                <a href="https://github.com/kcoopermiller" target="_blank" rel="noopener noreferrer"><FaGithub /></a>
               </div>
               {showEmail && (
                   <div className={styles.emailContainer}>
