@@ -13,3 +13,34 @@
 .backToHome {
     margin: 3rem 0 0;
 }
+
+.socials {
+    display: flex;
+    justify-content: space-between;
+    width: 200px;
+    margin-top: 20px;
+}
+
+.socials a {
+    color: #0070f3;
+    text-decoration: none;
+}
+
+.socials a:hover {
+    text-decoration: underline;
+}
+
+.socials button {
+    color: #0070f3;
+    background: none;
+    border: none;
+}
+
+.socials button:hover {
+    cursor: pointer;
+}
+
+.emailContainer {
+    display: flex;
+    align-items: center;
+}

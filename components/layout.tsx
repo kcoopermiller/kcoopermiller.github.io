@@ -4,6 +4,8 @@ import styles from './layout.module.css'
 import utilStyles from '../styles/utils.module.css'
 import Link from 'next/link'
 import Footer from './footer'
+import { FaEnvelope, FaLinkedin, FaGithub } from 'react-icons/fa'
+import { useState } from 'react'
 
 const name = 'Cooper Miller'
 export const siteTitle = name
@@ -15,6 +17,9 @@ export default function Layout({
   children: React.ReactNode
   home?: boolean
 }) {
+  const [showEmail, setShowEmail] = useState(false);
+  const toggleEmail = () => setShowEmail(!showEmail);
+
   return (
     <>
       <div className={styles.container}>
@@ -38,6 +43,17 @@ export default function Layout({
                 alt={name}
               />
               <h1 className={utilStyles.heading2Xl}>{name}</h1>
+              <div className={styles.socials}>
+                <button onClick={toggleEmail}><FaEnvelope /></button>
+                <a href="https://www.linkedin.com/in/cooper-miller/"><FaLinkedin /></a>
+                <a href="https://github.com/kcoopermiller"><FaGithub /></a>
+              </div>
+              {showEmail && (
+                  <div className={styles.emailContainer}>
+                    <p style={{marginRight: '20px'}}>your-email [at] example [dot] com</p>
+                    <Link href="/pubkey.txt">PGP Key</Link>
+                  </div>
+              )}
             </>
           ) : (
             <>
