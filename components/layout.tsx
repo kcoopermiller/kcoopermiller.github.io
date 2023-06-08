@@ -5,6 +5,7 @@ import utilStyles from '../styles/utils.module.css'
 import Link from 'next/link'
 import Footer from './footer'
 import { FaEnvelope, FaLinkedin, FaGithub } from 'react-icons/fa'
+import { SiGooglescholar } from 'react-icons/si'
 import { useState } from 'react'
 
 const name = 'Cooper Miller'
@@ -19,6 +20,9 @@ export default function Layout({
 }) {
   const [showEmail, setShowEmail] = useState(false);
   const toggleEmail = () => setShowEmail(!showEmail);
+
+  const [showScholar, setShowScholar] = useState(false);
+  const toggleScholar = () => setShowScholar(!showScholar);
 
   return (
     <>
@@ -47,6 +51,7 @@ export default function Layout({
                 <button onClick={toggleEmail}><FaEnvelope /></button>
                 <a href="https://www.linkedin.com/in/cooper-miller/" target="_blank" rel="noopener noreferrer"><FaLinkedin /></a>
                 <a href="https://github.com/kcoopermiller" target="_blank" rel="noopener noreferrer"><FaGithub /></a>
+                <button onClick={toggleScholar}><SiGooglescholar /></button>
               </div>
               {showEmail && (
                   <div className={styles.emailContainer}>
@@ -54,6 +59,7 @@ export default function Layout({
                     <Link href="/pubkey.txt">PGP Key</Link>
                   </div>
               )}
+              {showScholar && <p>google scholar coming soon!</p>}
             </>
           ) : (
             <>
