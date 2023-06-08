@@ -8,7 +8,7 @@ export default function Custom404() {
           <Head>
             <title>404</title>
           </Head>
-          <h1 className={utilStyles.headingXl}>404 - You're lost rip</h1>
+          <h1 style={{textAlign:'center'}} className={utilStyles.headingXl}>Page Not Found <br/> 😔</h1>
         </Layout>
     );
 }
