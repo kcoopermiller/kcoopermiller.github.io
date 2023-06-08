@@ -1,18 +1,19 @@
 import Head from 'next/head'
 import Layout, { siteTitle } from '../components/layout'
 import utilStyles from '../styles/utils.module.css'
-import { getSortedPostsData } from '../lib/posts'
+import { getSortedPubsData } from '../lib/pubs'
 import Link from 'next/link'
 import Date from '../components/date'
 import { GetStaticProps } from 'next'
 
 export default function Home({
-  allPostsData
+  allPubsData
 }: {
-  allPostsData: {
+  allPubsData: {
     date: string
     title: string
     id: string
+    authors: string
   }[]
 }) {
   return (
@@ -24,15 +25,17 @@ export default function Home({
         <p style={{textAlign: 'center'}}>Student at UIUC</p>
       </section>
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-        <h2 className={utilStyles.headingLg}>Blog</h2>
+        <h2 className={utilStyles.headingLg}>Publications</h2>
         <ul className={utilStyles.list}>
-          {allPostsData.map(({ id, date, title }) => (
+          {allPubsData.map(({ id, date, title, authors }) => (
             <li className={utilStyles.listItem} key={id}>
-              <Link href={`/posts/${id}`}>{title}</Link>
+              <Link href={`/pubs/${id}`}>{title}</Link>
               <br />
               <small className={utilStyles.lightText}>
                 <Date dateString={date} />
               </small>
+              <br />
+              <small className={utilStyles.lightText}>{authors}</small>
             </li>
           ))}
         </ul>
@@ -42,10 +45,10 @@ export default function Home({
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const allPostsData = getSortedPostsData()
+  const allPubsData = getSortedPubsData()
   return {
     props: {
-      allPostsData
+      allPubsData
     }
   }
 }
