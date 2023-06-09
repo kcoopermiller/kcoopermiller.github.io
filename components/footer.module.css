@@ -22,3 +22,10 @@
 .footer a:hover {
     text-decoration: underline;
 }
+
+.scrollToTop {
+    cursor: pointer;
+    position: fixed;
+    right: 64px;
+    margin-left: 20px;
+}
