@@ -29,3 +29,8 @@
     right: 64px;
     margin-left: 20px;
 }
+@media screen and (max-width: 500px) {
+    .scrollToTop {
+        display: none;
+    }
+}
