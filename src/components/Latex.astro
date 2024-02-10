@@ -1,0 +1,17 @@
+---
+import katex from "katex";
+
+const { formula = "", displayMode = false } = Astro.props;
+const html = katex.renderToString(formula, {
+  throwOnError: false,
+  displayMode: displayMode,
+});
+---
+
+<span set:html={html} />
+
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.css"
+  crossorigin="anonymous"
+/>

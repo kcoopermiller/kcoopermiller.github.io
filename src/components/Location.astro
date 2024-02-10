@@ -1,0 +1,16 @@
+---
+import { getVisitorLocation } from "../lib/helpers";
+import Card from "./Card/index.astro";
+import Graph from "./Graph.jsx";
+
+const apiKey = import.meta.env.GEOLOCATION_API_KEY;
+
+const visitorInfo = await getVisitorLocation(apiKey);
+const formattedDistance = `${visitorInfo.distance} mi`;
+const location = visitorInfo.location;
+const cardTitle = `We are ${formattedDistance} apart`;
+---
+
+<Card colSpan="lg:col-span-2" rowSpan="md:row-span-2" title={cardTitle}>
+  <Graph visitorLocation={location} client:only />
+</Card>
