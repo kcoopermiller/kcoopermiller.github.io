@@ -11,16 +11,20 @@ export function formatDate(date: Date): string {
   });
 }
 
-export async function getVisitorLocation(apiKey: string): Promise<{ location: string, distance: string }> {
-  const response = await fetch(`https://api.ipgeolocation.io/ipgeo?apiKey=${apiKey}`);
-  const data = await response.json();
-  const visitorLat = data.latitude;
-  const visitorLon = data.longitude;
+export async function getVisitorLocation(apiKey: string) {
+  // Use the visitor's IP to get the geolocation data
+  const geoResponse = await fetch('/api/location');
+  const geoData = await geoResponse.json();
+
+  // Your logic to calculate distance
+  const visitorLat = geoData.latitude;
+  const visitorLon = geoData.longitude;
   const yourLat = 40.1164;
-  const yourLon = -88.2434;
+  const yourLon = -88.2434; 
   const distance = calculateHaversineDistance(yourLat, yourLon, visitorLat, visitorLon);
+
   return {
-    location: data.city,
+    location: geoData.city,
     distance: distance,
   };
 }

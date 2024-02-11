@@ -23,6 +23,9 @@ dependencies:
   '@iconify-json/ri':
     specifier: ^1.1.18
     version: 1.1.18
+  '@netlify/edge-functions':
+    specifier: ^2.3.1
+    version: 2.3.1
   astro:
     specifier: ^4.0.8
     version: 4.0.8
@@ -1276,6 +1279,10 @@ packages:
       '@motionone/dom': 10.16.4
       tslib: 2.6.2
     dev: true
+
+  /@netlify/edge-functions@2.3.1:
+    resolution: {integrity: sha512-3sJzP1DmzMZppkAZpUixdHA4ryiKD1NSpLMRViYStE9Oe10rZPSnM8yl6A90vTBqCYvbAF5S7W9oPf2ucrCCIQ==}
+    dev: false
 
   /@netlify/functions@2.4.0:
     resolution: {integrity: sha512-dIqhdj5u4Lu/8qbYwtYpn8NfvIyPHbSTV2lAP4ocL+iwC9As06AXT0wa/xOpO2vRWJa0IMxdZaqCPnkyHlHiyg==}
