@@ -11,20 +11,20 @@ export function formatDate(date: Date): string {
   });
 }
 
-export async function getVisitorLocation(apiKey: string) {
+export async function getVisitorLocation() {
   // Use the visitor's IP to get the geolocation data
-  const geoResponse = await fetch('/api/location');
+  const geoResponse = await fetch('http://localhost:8888/geolocation');
   const geoData = await geoResponse.json();
 
   // Your logic to calculate distance
-  const visitorLat = geoData.latitude;
-  const visitorLon = geoData.longitude;
+  const visitorLat = geoData["geo"]["latitude"];
+  const visitorLon = geoData["geo"]["longitude"];
   const yourLat = 40.1164;
   const yourLon = -88.2434; 
   const distance = calculateHaversineDistance(yourLat, yourLon, visitorLat, visitorLon);
 
   return {
-    location: geoData.city,
+    location: geoData["geo"]["city"],
     distance: distance,
   };
 }

@@ -3,9 +3,7 @@ import { getVisitorLocation } from "../lib/helpers";
 import Card from "./Card/index.astro";
 import Graph from "./Graph.jsx";
 
-const apiKey = import.meta.env.GEOLOCATION_API_KEY;
-
-const visitorInfo = await getVisitorLocation(apiKey);
+const visitorInfo = await getVisitorLocation();
 const formattedDistance = `${visitorInfo.distance} mi`;
 const location = visitorInfo.location;
 const cardTitle = `We are ${formattedDistance} apart`;
