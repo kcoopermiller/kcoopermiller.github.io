@@ -1,12 +1,10 @@
 ---
 import Graph, { distanceToLocation } from "./Graph.jsx";
 import Card from "./Card/index.astro";
+
+const distance = distanceToLocation();
 ---
 
-<Card
-  colSpan="lg:col-span-2"
-  rowSpan="md:row-span-2"
-  title={distanceToLocation()}
->
+<Card colSpan="lg:col-span-2" rowSpan="md:row-span-2" title={distance}>
   <Graph client:only />
 </Card>

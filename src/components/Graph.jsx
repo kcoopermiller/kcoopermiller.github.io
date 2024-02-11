@@ -21,7 +21,7 @@ async function visitorInfo() {
 
 const { distance, location } = await visitorInfo();
 
-export function distanceToLocation() { const cardTitle = `We are ${distance} mi apart`; return cardTitle; }
+export function distanceToLocation() { return `We are ${distance} mi apart`; }
 
 function Graph() {
   let svgRef;
