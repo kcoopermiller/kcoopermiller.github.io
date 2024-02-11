@@ -143,6 +143,6 @@ export function Graph() {
   });
 
   return (
-    <svg ref={svgRef}></svg>
+    <svg class="hidden md:block" ref={svgRef}></svg>
   );
 }
