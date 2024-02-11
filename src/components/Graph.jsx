@@ -6,17 +6,12 @@ async function visitorInfo() {
   const geoResponse = await fetch('https://kcoopermiller.netlify.app/geolocation');
   const data = await geoResponse.json();
 
-  console.log(data["geo"]["latitude"]);
-  console.log(data["geo"]["longitude"]);
-
   const distance = calculateHaversineDistance(
     40.1164, // Champaign, IL latitude
     -88.2434, // Champaign, IL longitude
     data["geo"]["latitude"],
     data["geo"]["longitude"]
   );
-
-  console.log(distance);
 
   const location = data["geo"]["city"];
   return {
@@ -27,11 +22,7 @@ async function visitorInfo() {
 
 const { distance, location } = await visitorInfo();
 
-console.log(distance);
-
-export function distanceToLocation() { return `We are ${distance} mi apart`; }
-
-export function Graph() {
+export default function Graph() {
   let svgRef;
 
   onMount(() => {
@@ -151,6 +142,9 @@ export function Graph() {
   });
 
   return (
-    <svg class="hidden md:block" ref={svgRef}></svg>
+    <>
+      <h2 class="text-xl font-bold m-0 z-20">{distance}</h2>
+      <svg class="hidden md:block" ref={svgRef}></svg>
+    </>
   );
 }
