@@ -27,6 +27,8 @@ async function visitorInfo() {
 
 const { distance, location } = await visitorInfo();
 
+console.log(distance);
+
 export function distanceToLocation() { return `We are ${distance} mi apart`; }
 
 export function Graph() {
