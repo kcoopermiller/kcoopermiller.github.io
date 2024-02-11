@@ -20,6 +20,9 @@ async function visitorInfo() {
 }
 
 const { distance, location } = await visitorInfo();
+
+export function distanceToLocation() { const cardTitle = `We are ${distance} mi apart`; return cardTitle; }
+
 function Graph() {
   let svgRef;
 
@@ -138,8 +141,6 @@ function Graph() {
 
     animateDFS(3); // Start DFS animation from the 'Your Location' node
   });
-
-  const cardTitle = `We are ${distance} mi apart`;
 
   return (
     <svg ref={svgRef}></svg>
