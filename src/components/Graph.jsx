@@ -23,7 +23,7 @@ const { distance, location } = await visitorInfo();
 
 export function distanceToLocation() { return `We are ${distance} mi apart`; }
 
-function Graph() {
+export function Graph() {
   let svgRef;
 
   onMount(() => {
@@ -146,5 +146,3 @@ function Graph() {
     <svg ref={svgRef}></svg>
   );
 }
-
-export default Graph;
