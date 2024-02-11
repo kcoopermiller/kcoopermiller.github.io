@@ -1,7 +1,7 @@
 import { createSignal, onMount } from 'solid-js';
 import * as d3 from 'd3';
 
-const gridSize = 66;
+const gridSize = 60;
 const cellSize = 6;
 
 const GameOfLife = () => {
