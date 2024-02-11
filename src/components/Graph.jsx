@@ -64,7 +64,7 @@ export default function Graph() {
                       .attr('cx', d => d.x)
                       .attr('cy', d => d.y);
 
-        // Add labels to the first and last nodes
+    // Add labels to the first and last nodes
     svg.selectAll('text')
         .data(nodes.filter((d, i) => i === 0 || i === nodes.length - 1)) // Filter only the first and last nodes
         .enter().append('text')
@@ -77,68 +77,45 @@ export default function Graph() {
           .style('font-weight', 'bold')
           .style('font-family', 'Cabinet Grotesk')
 
-    // DFS Animation
-    function animateDFS(startNodeIndex) {
-      const visited = new Set(); // To keep track of visited nodes
-      const stack = [[startNodeIndex, -1]]; // Initialize stack with the start node index and a dummy parent index
-      const transitions = []; // To queue up transitions for animation
-    
       // Function to highlight a node
       const highlightNode = (nodeIndex) => {
-        transitions.push(() => node.filter((d, i) => i === nodeIndex)
+        node.filter((d, i) => i === nodeIndex)
           .transition()
           .duration(500)
-          .style('fill', '#BC002D')); // Change color to highlight
+          .style('fill', '#BC002D'); // Change color to highlight
       };
     
       // Function to highlight a link between two nodes
       const highlightLink = (sourceIndex, targetIndex) => {
-        transitions.push(() => link.filter(d => (d.source === sourceIndex && d.target === targetIndex) || (d.source === targetIndex && d.target === sourceIndex))
+        link.filter(d => (d.source === sourceIndex && d.target === targetIndex) || (d.source === targetIndex && d.target === sourceIndex))
           .transition()
           .duration(500)
-          .style('stroke', '#BC002D')); // Change color to highlight
+          .style('stroke', '#BC002D'); // Change color to highlight
       };
-    
-      // Main DFS function
-      const dfs = () => {
-        while (stack.length > 0) {
-          const [currentNodeIndex, parentIndex] = stack.pop(); // Get current node and its parent from the stack
-    
-          if (!visited.has(currentNodeIndex)) {
-            visited.add(currentNodeIndex); // Mark current node as visited
-            highlightNode(currentNodeIndex); // Queue highlight transition for the current node
-    
-            if (parentIndex !== -1) {
-              highlightLink(parentIndex, currentNodeIndex); // Queue highlight transition for the link if it's not the start node
-            }
-    
-            // Add all unvisited adjacent nodes to the stack
-            links.forEach((link, index) => {
-              if (link.source === currentNodeIndex && !visited.has(link.target)) {
-                stack.push([link.target, currentNodeIndex]);
-              } else if (link.target === currentNodeIndex && !visited.has(link.source)) {
-                stack.push([link.source, currentNodeIndex]);
-              }
-            });
-          }
-        }
-      };
-    
-      // Execute DFS to populate the transitions queue
-      dfs();
-    
-      // Function to execute transitions in sequence
-      const runTransitions = (i = 0) => {
-        if (i < transitions.length) {
-          transitions[i]().on('end', () => runTransitions(i + 1)); // Call the next transition after the current one ends
-        }
-      };
-    
-      // Start executing transitions
-      runTransitions();
-    }       
 
-    animateDFS(3); // Start DFS animation from the 'Your Location' node
+      // Execute the highlighting sequence
+      setTimeout(() => {
+        highlightNode(3);
+      }, 500);
+      setTimeout(() => {
+        highlightNode(2);
+      }, 1000);
+      setTimeout(() => {
+        highlightLink(2, 3);
+      }, 1500);
+      setTimeout(() => {
+        highlightNode(1);
+      }, 2000);
+      setTimeout(() => {
+        highlightLink(1, 2);
+      }, 2500);
+      setTimeout(() => {
+        highlightNode(0);
+      }, 3000);
+      setTimeout(() => {
+        highlightLink(0, 1);
+      }, 3500);
+        
   });
 
   return (
