@@ -6,12 +6,18 @@ async function visitorInfo() {
   const geoResponse = await fetch('https://kcoopermiller.netlify.app/geolocation');
   const data = await geoResponse.json();
 
+  console.log(data["geo"]["latitude"]);
+  console.log(data["geo"]["longitude"]);
+
   const distance = calculateHaversineDistance(
     40.1164, // Champaign, IL latitude
     -88.2434, // Champaign, IL longitude
     data["geo"]["latitude"],
     data["geo"]["longitude"]
   );
+
+  console.log(distance);
+
   const location = data["geo"]["city"];
   return {
     distance,
