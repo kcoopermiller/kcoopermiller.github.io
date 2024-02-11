@@ -13,7 +13,7 @@ export function formatDate(date: Date): string {
 
 export async function getVisitorLocation() {
   // Use the visitor's IP to get the geolocation data
-  const geoResponse = await fetch('/geolocation');
+  const geoResponse = await fetch('https://kcoopermiller.netlify.app/geolocation');
   const geoData = await geoResponse.json();
 
   // Your logic to calculate distance
