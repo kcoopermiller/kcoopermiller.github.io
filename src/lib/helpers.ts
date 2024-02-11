@@ -11,26 +11,26 @@ export function formatDate(date: Date): string {
   });
 }
 
-export async function getVisitorLocation() {
-  // Use the visitor's IP to get the geolocation data
-  const geoResponse = await fetch('/geolocation');
-  const geoData = await geoResponse.json();
+// export async function getVisitorLocation() {
+//   // Use the visitor's IP to get the geolocation data
+//   const geoResponse = await fetch('/geolocation');
+//   const geoData = await geoResponse.json();
 
-  // Your logic to calculate distance
-  const visitorLat = geoData["geo"]["latitude"];
-  const visitorLon = geoData["geo"]["longitude"];
-  const yourLat = 40.1164;
-  const yourLon = -88.2434; 
-  const distance = calculateHaversineDistance(yourLat, yourLon, visitorLat, visitorLon);
+//   // Your logic to calculate distance
+//   const visitorLat = geoData["geo"]["latitude"];
+//   const visitorLon = geoData["geo"]["longitude"];
+//   const yourLat = 40.1164;
+//   const yourLon = -88.2434; 
+//   const distance = calculateHaversineDistance(yourLat, yourLon, visitorLat, visitorLon);
 
-  return {
-    location: geoData["geo"]["city"],
-    distance: distance,
-  };
-}
+//   return {
+//     location: geoData["geo"]["city"],
+//     distance: distance,
+//   };
+// }
 
 // Haversine formula to calculate distance
-function calculateHaversineDistance(lat1: number, lon1: number, lat2: number, lon2: number) {
+export function calculateHaversineDistance(lat1: number, lon1: number, lat2: number, lon2: number) {
   // Radius of the Earth in miles
   const R = 3958.8;
   const radianLat1 = lat1 * (Math.PI / 180);

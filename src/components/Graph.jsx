@@ -1,8 +1,29 @@
 import { onMount } from 'solid-js';
 import * as d3 from 'd3';
+import { calculateHaversineDistance } from "../lib/helpers";
 
-function Graph(props) {
+async function visitorInfo() {
+  const geoResponse = await fetch('/geolocation');
+  const data = await geoResponse.json();
+
+  const distance = calculateHaversineDistance(
+    40.1164, // Champaign, IL latitude
+    -88.2434, // Champaign, IL longitude
+    data["geo"]["latitude"],
+    data["geo"]["longitude"]
+  );
+  const location = data["geo"]["city"];
+  return {
+    distance,
+    location,
+  };
+}
+
+const { distance, location } = await visitorInfo();
+function Graph() {
   let svgRef;
+
+  console.log(distance, location)
 
   onMount(() => {
     const width = 450, height = 100;
@@ -10,7 +31,7 @@ function Graph(props) {
     const svg = d3.select(svgRef).attr('width', width).attr('height', height);
 
     const nodes = [
-      { id: props.visitorLocation, x: 100, y: height / 2 },
+      { id: location, x: 100, y: height / 2 },
       { id: '', x: 300, y: height - 25},
       { id: '', x: 200, y: height - 70},
       { id: 'Champaign', x: 400, y: height / 2 }
@@ -119,6 +140,8 @@ function Graph(props) {
 
     animateDFS(3); // Start DFS animation from the 'Your Location' node
   });
+
+  const cardTitle = `We are ${distance} mi apart`;
 
   return (
     <svg ref={svgRef}></svg>
