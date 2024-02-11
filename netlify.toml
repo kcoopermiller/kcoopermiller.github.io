@@ -1,3 +1,7 @@
 [[edge_functions]]
 path = "/geolocation"
 function = "geolocation"
+[[headers]]
+for = "/*"
+[headers.values]
+Access-Control-Allow-Origin = "*"

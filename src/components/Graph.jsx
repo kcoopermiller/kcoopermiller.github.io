@@ -23,13 +23,11 @@ const { distance, location } = await visitorInfo();
 function Graph() {
   let svgRef;
 
-  console.log(distance, location)
-
   onMount(() => {
     const width = 450, height = 100;
 
     const svg = d3.select(svgRef).attr('width', width).attr('height', height);
-
+    
     const nodes = [
       { id: location, x: 100, y: height / 2 },
       { id: '', x: 300, y: height - 25},
