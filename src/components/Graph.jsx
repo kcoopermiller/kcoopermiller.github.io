@@ -3,7 +3,7 @@ import * as d3 from 'd3';
 import { calculateHaversineDistance } from "../lib/helpers";
 
 async function visitorInfo() {
-  const geoResponse = await fetch('https://kcoopermiller.netlify.app/geolocation');
+  const geoResponse = await fetch('https://kcm.sh/geolocation');
   const data = await geoResponse.json();
 
   const distance = calculateHaversineDistance(
