@@ -120,8 +120,14 @@ export default function Graph() {
 
   return (
     <>
-      <h2 class="text-xl font-bold m-0 z-20">We are {distance} miles apart</h2>
-      <svg class="hidden md:block" ref={svgRef}></svg>
+    {distance && location ? (
+      <>
+        <h2 class="text-xl font-bold m-0 z-20">We are {distance} miles apart</h2>
+        <svg class="hidden md:block" ref={svgRef}></svg>
+      </>
+    ) : (
+      <p>Unable to retrieve visitor information</p>
+    )}
     </>
   );
 }
