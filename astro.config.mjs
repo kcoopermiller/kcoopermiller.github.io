@@ -17,7 +17,10 @@ export default defineConfig({
     injectReset: true
   }), icon(), mdx()],
   markdown: {
-    remarkPlugins: [remarkReadingTime]
+    remarkPlugins: [remarkReadingTime],
+    shikiConfig: {
+      theme: "nord"
+    }
   },
   output: 'server',
   adapter: netlify()
