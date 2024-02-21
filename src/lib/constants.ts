@@ -1,6 +1,7 @@
 export const LINKS = {
   github: "https://github.com/kcoopermiller",
   x: "https://x.com/kcoopermiller",
+  hf: "https://huggingface.co/kcoopermiller",
   scholar: "https://scholar.google.com"
 };
 
