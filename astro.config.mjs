@@ -19,7 +19,7 @@ export default defineConfig({
   markdown: {
     remarkPlugins: [remarkReadingTime],
     shikiConfig: {
-      theme: "nord"
+      theme: "dracula-soft"
     }
   },
   output: 'server',
