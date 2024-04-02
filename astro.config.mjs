@@ -5,7 +5,7 @@ import robotsTxt from "astro-robots-txt";
 import UnoCSS from "@unocss/astro";
 import icon from "astro-icon";
 import solidJs from "@astrojs/solid-js";
-import { remarkReadingTime } from "./src/lib/ remark-reading-time.mjs";
+import { remarkReadingTime } from "./src/lib/remark-reading-time.mjs";
 import mdx from "@astrojs/mdx";
 
 // https://astro.build/config
