@@ -18,6 +18,7 @@
     "@iconify-json/ri": "^1.1.18",
     "@netlify/edge-functions": "^2.3.1",
     "astro": "^4.0.8",
+    "astro-embed": "^0.7.1",
     "astro-icon": "^1.0.1",
     "astro-robots-txt": "^1.0.0",
     "katex": "^0.16.9",
