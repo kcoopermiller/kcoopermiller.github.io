@@ -1,0 +1,48 @@
+---
+import BasicLayout from "./Layout.astro";
+import { Image } from "astro:assets";
+
+export interface Props {
+  title: string;
+  description: string;
+  photos: { src: Promise<{ default: ImageMetadata }>; alt: string }[];
+}
+
+const { title, description, photos } = Astro.props;
+
+const splitIntoColumns = (photos: Props["photos"], numColumns: number) => {
+  const columns = Array.from({ length: numColumns }, () => []);
+  photos.forEach((photo, index) => {
+    columns[index % numColumns].push(photo);
+  });
+  return columns;
+};
+
+const columns = splitIntoColumns(photos, 4);
+---
+
+<BasicLayout title=`Cooper Miller - ${title}` description=`${title} photos`>
+  <section class="mb-6">
+    <h2 class="text-lg font-bold mb-2">{title}</h2>
+    <p>{description}</p>
+  </section>
+  <div class="flex flex-wrap -mx-2">
+    {
+      columns.map((column) => (
+        <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 px-2">
+          {column.map(async (photo) => {
+            const { default: image } = await photo.src;
+            return (
+              <Image
+                src={image}
+                alt={photo.alt}
+                class="w-full mb-4 hover:opacity-80 transition-opacity duration-300"
+                onclick="window.open(this.src)"
+              />
+            );
+          })}
+        </div>
+      ))
+    }
+  </div>
+</BasicLayout>

@@ -1,0 +1,44 @@
+---
+import PhotosLayout from "../../layouts/PhotosLayout.astro";
+import type { ImageMetadata } from "astro";
+
+export async function getStaticPaths() {
+  const albumsData = [
+    {
+      slug: "nepal",
+      title: "Nepal",
+      description: "August - December 2019",
+    },
+  ];
+
+  const allPhotos = import.meta.glob<{ default: ImageMetadata }>(
+    "/src/assets/albums/**/*.{JPG,jpg,jpeg,JPEG,png,gif,webp}"
+  );
+
+  const albums = await Promise.all(
+    albumsData.map(async (album) => {
+      const albumPhotos = Object.keys(allPhotos)
+        .filter((path) => path.includes(`/src/assets/photos/${album.slug}/`))
+        .map((path) => ({
+          src: allPhotos[path](),
+          alt: path.split("/").pop()?.split(".")[0], // Use filename as alt text
+        }));
+
+      return {
+        params: { album: album.slug },
+        props: {
+          title: album.title,
+          description: album.description,
+          photos: albumPhotos,
+        },
+      };
+    })
+  );
+
+  return albums;
+}
+
+const { title, description, photos } = Astro.props;
+---
+
+<PhotosLayout title={title} description={description} photos={photos} />
