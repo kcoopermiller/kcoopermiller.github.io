@@ -1,5 +1,5 @@
 ---
-import BasicLayout from "./Layout.astro";
+import Layout from "./Layout.astro";
 import { Image } from "astro:assets";
 
 export interface Props {
@@ -8,9 +8,10 @@ export interface Props {
   photos: { src: Promise<{ default: ImageMetadata }>; alt: string }[];
 }
 
-const { title, description, photos } = Astro.props;
+const { title, description, photos = [] } = Astro.props;
 
 const splitIntoColumns = (photos: Props["photos"], numColumns: number) => {
+  if (!photos || photos.length === 0) return [];
   const columns = Array.from({ length: numColumns }, () => []);
   photos.forEach((photo, index) => {
     columns[index % numColumns].push(photo);
@@ -21,7 +22,7 @@ const splitIntoColumns = (photos: Props["photos"], numColumns: number) => {
 const columns = splitIntoColumns(photos, 4);
 ---
 
-<BasicLayout title=`Cooper Miller - ${title}` description=`${title} photos`>
+<Layout title={title} description={description}>
   <section class="mb-6">
     <h2 class="text-lg font-bold mb-2">{title}</h2>
     <p>{description}</p>
@@ -45,4 +46,4 @@ const columns = splitIntoColumns(photos, 4);
       ))
     }
   </div>
-</BasicLayout>
+</Layout>

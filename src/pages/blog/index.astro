@@ -34,7 +34,7 @@ const posts = (await getCollection("blog")).sort(
           <PostRow
             title={post.data.title}
             date={post.data.pubDate}
-            url={post.slug}
+            url={`/blog/${post.slug}`}
           />
         ))
       }
