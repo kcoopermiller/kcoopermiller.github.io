@@ -3,10 +3,9 @@ import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import PostRow from "../../components/Blog/PostRow.astro";
 
-const photos = (await getCollection("blog")).sort(
-  (blogEntryA, blogEntryB) =>
-    blogEntryB.data.pubDate.getTime() - blogEntryA.data.pubDate.getTime()
-);
+const albums = [
+    {title: "Nepal", date: "2019-08-01", url: "/photos/nepal"},
+]
 ---
 
 <script>
@@ -30,11 +29,11 @@ const photos = (await getCollection("blog")).sort(
     <h1 class="text-4xl font-bold mb-4 text-neutral-100">Photography</h1>
     <ul class="w-full">
       {
-        photos.map((photo) => (
+        albums.map((album) => (
           <PostRow
-            title={photo.data.title}
-            date={photo.data.pubDate}
-            url={photo.slug}
+            title={album.title}
+            date={new Date(album.date)}
+            url={album.url}
           />
         ))
       }
