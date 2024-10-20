@@ -12,6 +12,7 @@ import embeds from "astro-embed/integration";
 // https://astro.build/config
 export default defineConfig({
   site: "https://kcoopermiller.github.io/",
+  prefetch: true,
   integrations: [sitemap(), robotsTxt({
     sitemap: ["https://kcoopermiller.github.io/sitemap-index.xml", "https://kcoopermiller.github.io/sitemap-0.xml"]
   }), solidJs(), UnoCSS({
