@@ -7,7 +7,8 @@ import icon from "astro-icon";
 import solidJs from "@astrojs/solid-js";
 import { remarkReadingTime } from "./src/lib/remark-reading-time.mjs";
 import mdx from "@astrojs/mdx";
-import embeds from "astro-embed/integration";
+import remarkMath from 'remark-math'
+import rehypeKatex from 'rehype-katex';
 
 // https://astro.build/config
 export default defineConfig({
@@ -17,9 +18,10 @@ export default defineConfig({
     sitemap: ["https://kcoopermiller.github.io/sitemap-index.xml", "https://kcoopermiller.github.io/sitemap-0.xml"]
   }), solidJs(), UnoCSS({
     injectReset: true
-  }), icon(), embeds(), mdx()],
+  }), icon(), mdx()],
   markdown: {
-    remarkPlugins: [remarkReadingTime],
+    remarkPlugins: [remarkReadingTime, remarkMath],
+    rehypePlugins: [rehypeKatex],
     shikiConfig: {
       theme: "dracula-soft"
     }

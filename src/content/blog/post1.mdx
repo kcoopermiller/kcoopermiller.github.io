@@ -6,15 +6,18 @@ pubDate: 2024-01-1
 category: "intro"
 ---
 
-import Latex from "../../components/Latex.astro";
+import Tweet from "astro-tweet";
 
 # Blogs coming soon!
 
 These blogs currently support:
 
-Inline equations: <Latex formula="\text{Attention}(Q,K,V)=\text{softmax}(\frac{QK^T}{\sqrt{d_k}})V" displayMode={false} /> yay!
+Inline equations: $\text{Attention}(Q,K,V)=\text{softmax}(\frac{QK^T}{\sqrt{d_k}})V$
 
-Block equations: <Latex formula="\text{Attention}(Q,K,V)=\text{softmax}(\frac{QK^T}{\sqrt{d_k}})V" displayMode={true} /> yay!
+Block equations: 
+$$
+\text{Attention}(Q,K,V)=\text{softmax}(\frac{QK^T}{\sqrt{d_k}})V
+$$
 
 ```python
 def f(x):
@@ -26,5 +29,4 @@ def f(x):
 - <a class="text-dracula-50 hover:underline" href="/blog/post1">links</a>
 - and more!
 
-{/* <script async src="https://platform.twitter.com/widgets.js"></script>
-https://twitter.com/osanseviero/status/1745536821449121811 */}
+<div class="flex justify-center"><Tweet id="1800576355173822721" /></div>
