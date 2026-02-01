@@ -45,9 +45,10 @@ const columns = splitIntoColumns(photos, 4);
             <Image
               src={photo.src}
               alt={photo.alt}
+              width={400}
               class="w-full mb-4 hover:opacity-80 transition-opacity duration-300"
               onclick="window.open(this.src)"
-              loading="eager"
+              loading="lazy"
               decoding="async"
             />
           ))}
