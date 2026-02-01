@@ -17,12 +17,19 @@ export async function getStaticPaths() {
 
   const albums = await Promise.all(
     albumsData.map(async (album) => {
-      const albumPhotos = Object.keys(allPhotos)
-        .filter((path) => path.includes(`/src/assets/photos/${album.url}/`))
-        .map((path) => ({
-          src: allPhotos[path](),
-          alt: path.split("/").pop()?.split(".")[0] || "", // Use filename as alt text, provide fallback
-        }));
+      const photoPaths = Object.keys(allPhotos).filter((path) =>
+        path.includes(`/src/assets/photos/${album.url}/`)
+      );
+
+      const albumPhotos = await Promise.all(
+        photoPaths.map(async (path) => {
+          const image = await allPhotos[path]();
+          return {
+            src: image.default,
+            alt: path.split("/").pop()?.split(".")[0] || "",
+          };
+        })
+      );
 
       return {
         params: { album: album.url },
