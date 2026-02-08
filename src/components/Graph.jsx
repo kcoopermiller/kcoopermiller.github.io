@@ -7,8 +7,8 @@ async function visitorInfo() {
   const data = await geoResponse.json();
 
   const distance = calculateHaversineDistance(
-    40.1164, // Champaign, IL latitude
-    -88.2434, // Champaign, IL longitude
+    37.7749, // San Francisco, CA latitude
+    -122.4194, // San Francisco, CA longitude
     data["geo"]["latitude"],
     data["geo"]["longitude"]
   );
@@ -34,7 +34,7 @@ export default function Graph() {
       { id: location, x: 100, y: height / 2 },
       { id: '', x: 300, y: height - 25},
       { id: '', x: 200, y: height - 70},
-      { id: 'Champaign', x: 400, y: height / 2 }
+      { id: 'San Francisco', x: 400, y: height / 2 }
     ];
 
     const links = [
