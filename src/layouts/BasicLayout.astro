@@ -15,6 +15,20 @@ const { title, description, page } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link
+      rel="preload"
+      href="/fonts/CabinetGrotesk-Variable.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/Satoshi-Variable.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <meta name="description" content={description} />
@@ -44,14 +58,14 @@ const { title, description, page } = Astro.props;
 <style is:global>
   @font-face {
     font-family: "CabinetGrotesk";
-    src: url("/fonts/CabinetGrotesk-Variable.ttf") format("truetype-variations");
+    src: url("/fonts/CabinetGrotesk-Variable.woff2") format("woff2");
     font-style: normal;
     font-display: swap;
     font-weight: 100 1000;
   }
   @font-face {
     font-family: "Satoshi";
-    src: url("/fonts/Satoshi-Variable.ttf") format("truetype-variations");
+    src: url("/fonts/Satoshi-Variable.woff2") format("woff2");
     font-style: normal;
     font-display: swap;
     font-weight: 100 1000;
@@ -93,7 +107,7 @@ const { title, description, page } = Astro.props;
     font-size: 1rem;
   }
   #blog h6 {
-    font-family: "Cabinet Grotesk", sans-serif;
+    font-family: "CabinetGrotesk", sans-serif;
     font-size: 0.875rem;
   }
   p {

@@ -12,10 +12,10 @@ import rehypeKatex from 'rehype-katex';
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://kcoopermiller.github.io/",
+  site: "https://kcm.sh/",
   prefetch: true,
   integrations: [sitemap(), robotsTxt({
-    sitemap: ["https://kcoopermiller.github.io/sitemap-index.xml", "https://kcoopermiller.github.io/sitemap-0.xml"]
+    sitemap: ["https://kcm.sh/sitemap-index.xml", "https://kcm.sh/sitemap-0.xml"]
   }), solidJs(), UnoCSS({
     injectReset: true
   }), icon(), mdx()],
@@ -26,6 +26,6 @@ export default defineConfig({
       theme: "dracula-soft"
     }
   },
-  output: 'server',
+  output: 'hybrid',
   adapter: netlify()
 });

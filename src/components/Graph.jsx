@@ -75,7 +75,7 @@ export default function Graph() {
           .style('fill', 'white')
           .style('font-size', '13px')
           .style('font-weight', 'bold')
-          .style('font-family', 'Cabinet Grotesk')
+          .style('font-family', 'CabinetGrotesk')
 
       // Function to highlight a node
       const highlightNode = (nodeIndex) => {

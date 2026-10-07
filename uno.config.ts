@@ -1,9 +1,9 @@
 // uno.config.ts
-import { defineConfig, presetUno, presetWebFonts } from "unocss";
+import { defineConfig, presetUno } from "unocss";
 
 export default defineConfig({
   content: {
-    filesystem: ["**/*.{html,js,ts,jsx,tsx,vue,svelte,astro}"],
+    filesystem: ["src/**/*.{html,js,ts,jsx,tsx,vue,svelte,astro}"],
   },
   theme: {
     boxShadow: {
@@ -60,14 +60,5 @@ export default defineConfig({
       },
     },
   },
-  presets: [
-    presetUno(),
-    presetWebFonts({
-      provider: "fontshare",
-      fonts: {
-        sans: ["Cabinet Grotesk", "Satoshi"],
-        serif: "Zodiak",
-      },
-    }),
-  ],
+  presets: [presetUno()],
 });
