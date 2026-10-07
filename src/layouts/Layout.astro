@@ -18,3 +18,22 @@ const { title, description, page } = Astro.props;
   </div>
   <slot />
 </BasicLayout>
+
+<style>
+  .loader {
+    pointer-events: none;
+    animation: loader-out 0.3s ease-out forwards;
+  }
+
+  @keyframes loader-out {
+    to {
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .loader {
+      display: none;
+    }
+  }
+</style>

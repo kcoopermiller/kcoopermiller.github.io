@@ -37,7 +37,6 @@
     "autoprefixer": "^10.4.20",
     "d3": "^7.9.0",
     "markdown-it": "^14.1.0",
-    "motion": "^10.18.0",
     "sanitize-html": "^2.13.1",
     "unocss": "^0.58.9"
   }
