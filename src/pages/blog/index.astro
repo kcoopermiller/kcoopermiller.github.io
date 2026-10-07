@@ -9,15 +9,6 @@ const posts = (await getCollection("blog")).sort(
 );
 ---
 
-<script>
-  import { timeline, type TimelineDefinition } from "motion";
-  import { loaderAnimation } from "../../lib/constants";
-
-  const sequence = [loaderAnimation];
-
-  timeline(sequence as TimelineDefinition);
-</script>
-
 <Layout title="Cooper Miller - Blog" description="Cooper Miller's blog posts">
   <main
     class="w-screen h-screen flex flex-col justify-start items-start max-w-3xl mx-auto p-8"
