@@ -1,48 +1,58 @@
-import { createSignal, onMount } from 'solid-js';
-import * as d3 from 'd3';
+import { onCleanup, onMount } from 'solid-js';
 
 const gridSize = 60;
 const cellSize = 6;
+const aliveColor = '#737373';
+const deadColor = '#171717';
 
 const GameOfLife = () => {
-  let svgRef;
-  const [grid, setGrid] = createSignal(initializeGrid(gridSize, gridSize));
+  let canvasRef;
 
   onMount(() => {
-    const svg = d3.select(svgRef);
-    drawGrid(svg, grid());
+    const size = gridSize * cellSize;
+    const scale = window.devicePixelRatio || 1;
+    canvasRef.width = size * scale;
+    canvasRef.height = size * scale;
+
+    const ctx = canvasRef.getContext('2d');
+    ctx.scale(scale, scale);
+
+    let grid = initializeGrid();
+    let next = new Uint8Array(gridSize * gridSize);
+    drawGrid(ctx, grid);
 
     const interval = setInterval(() => {
-      setGrid(grid => updateGrid(grid));
-      drawGrid(svg, grid());
+      updateGrid(grid, next);
+      [grid, next] = [next, grid];
+      drawGrid(ctx, grid);
     }, 80);
 
-    return () => clearInterval(interval);
+    onCleanup(() => clearInterval(interval));
   });
 
-  function initializeGrid(rows, cols) {
-    return Array.from({ length: rows }, () =>
-      Array.from({ length: cols }, () => Math.floor(Math.random() * 1.25)) // 0 or 1 with a slight bias towards 0
-    );
+  function initializeGrid() {
+    const grid = new Uint8Array(gridSize * gridSize);
+    for (let i = 0; i < grid.length; i++) {
+      grid[i] = Math.floor(Math.random() * 1.25); // 0 or 1 with a slight bias towards 0
+    }
+    return grid;
   }
 
-  function updateGrid(grid) {
-    const newGrid = grid.map((row, i) =>
-      row.map((cell, j) => {
-        const neighbors = getNeighbors(grid, i, j);
-        const aliveNeighbors = neighbors.filter(n => n === 1).length;
+  function updateGrid(grid, next) {
+    for (let y = 0; y < gridSize; y++) {
+      for (let x = 0; x < gridSize; x++) {
+        const cell = grid[y * gridSize + x];
+        const aliveNeighbors = countNeighbors(grid, x, y);
 
-        if (cell === 1 && (aliveNeighbors < 2 || aliveNeighbors > 3)) return 0;
-        if (cell === 0 && aliveNeighbors === 3) return 1;
-        return cell;
-      })
-    );
-
-    return newGrid;
+        if (cell === 1 && (aliveNeighbors < 2 || aliveNeighbors > 3)) next[y * gridSize + x] = 0;
+        else if (cell === 0 && aliveNeighbors === 3) next[y * gridSize + x] = 1;
+        else next[y * gridSize + x] = cell;
+      }
+    }
   }
 
-  function getNeighbors(grid, x, y) {
-    const neighbors = [];
+  function countNeighbors(grid, x, y) {
+    let count = 0;
 
     for (let i = -1; i <= 1; i++) {
       for (let j = -1; j <= 1; j++) {
@@ -51,42 +61,33 @@ const GameOfLife = () => {
         const yj = y + j;
 
         if (xi >= 0 && xi < gridSize && yj >= 0 && yj < gridSize) {
-          neighbors.push(grid[xi][yj]);
+          count += grid[yj * gridSize + xi];
         }
       }
     }
 
-    return neighbors;
+    return count;
   }
 
-  function drawGrid(svg, grid) {
-    const cells = svg
-      .selectAll('rect')
-      .data(flattenGrid(grid), (d, i) => i)
-      .join(
-        enter => enter.append('rect')
-          .attr('x', d => d.x * cellSize)
-          .attr('y', d => d.y * cellSize)
-          .attr('width', cellSize)
-          .attr('height', cellSize)
-          .attr('fill', d => d.alive ? '#737373' : '#171717'),
-        update => update
-          .attr('fill', d => d.alive ? '#737373' : '#171717')
-      );
-  }
+  function drawGrid(ctx, grid) {
+    ctx.fillStyle = deadColor;
+    ctx.fillRect(0, 0, gridSize * cellSize, gridSize * cellSize);
 
-  function flattenGrid(grid) {
-    const flatArray = [];
+    ctx.fillStyle = aliveColor;
     for (let y = 0; y < gridSize; y++) {
       for (let x = 0; x < gridSize; x++) {
-        flatArray.push({ x, y, alive: grid[y][x] === 1 });
+        if (grid[y * gridSize + x] === 1) {
+          ctx.fillRect(x * cellSize, y * cellSize, cellSize, cellSize);
+        }
       }
     }
-    return flatArray;
   }
 
   return (
-    <svg ref={svgRef} width={gridSize * cellSize} height={gridSize * cellSize}></svg>
+    <canvas
+      ref={canvasRef}
+      style={{ width: `${gridSize * cellSize}px`, height: `${gridSize * cellSize}px` }}
+    ></canvas>
   );
 };
 
