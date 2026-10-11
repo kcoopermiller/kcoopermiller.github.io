@@ -49,7 +49,7 @@ export default function Graph() {
     {distance && location ? (
       <>
         <h2 class="text-xl font-bold m-0 z-20">We are {distance} {Number(distance) === 1 ? "mile" : "miles"} apart</h2>
-        <svg class="hidden md:block" width={width} height={height}>
+        <svg class="hidden md:block max-w-full h-auto" width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
           <style>{`
             @keyframes graph-node { to { fill: ${highlightColor}; } }
             @keyframes graph-link { to { stroke: ${highlightColor}; } }
